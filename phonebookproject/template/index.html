@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Phone Book</h1>
+    <h3>Add contacts</h3>
+    <form action="add" method="POST">
+        {% csrf_token %}
+        
+        <p>Name:<input type="text" name="cname"></p>
+        <p>Number:<input type="text" name="num"></p>
+        <input type="submit" value="Add Contact">
+        {{msg}}
+        
+    </form>
+    <h3>Contacts</h3>
+    <form action="disp">
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>Phone Number</th>
+            </tr>
+            {% for i in pb %}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.phone}}</td>
+            </tr>
+            {% endfor %}
+        </table><br>
+        <input type="submit" value="Display Contacts">
+
+    </form>
+    
+    <h3>Delete a contact</h3>
+    <form action="del" method="POST">
+        {% csrf_token %}
+        <p>Enter name:<input type="text" name="dname"></p>
+        <input type="submit" value="Delete">
+        {{dmsg}}
+        
+
+    </form>
+    
+    <h3>Updation</h3>
+    <form action="upname" method="POST">
+        {% csrf_token %}
+        <p>Enter the field to be updated name/phone: <input type="text" name="naph" > </p>
+        <h3>Update Name</h3>
+        <p>Enter old name: <input type="text" name="old"></p>
+        <p>Enter new name: <input type="text" name="new"></p>
+        <input type="submit" value="Update">
+        
+        <h3>Update Phone Number</h3>
+    
+        <p>Enter whose number to be change: <input type="text" name="old2"></p>
+        <p>Enter new Number: <input type="text" name="newph"> </p>
+        <input type="submit" value="Update">
+        {{upmsg}}
+    </form>
+    
+</body>
+</html>
